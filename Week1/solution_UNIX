@@ -1,0 +1,35 @@
+Solution task 1:
+tr ' ' '\n' < popfile | sed '/^$/d' | sort | uniq -c | sort -n -r | head
+
+Makes white space into new lines
+Removes empty lines 
+	/ - start of regex
+	^ - start of line
+	$ - end of line
+	/ - end of regex
+	d - delete lines which match
+Sort words
+count uniques in sorted lest
+sort the uniqe count numeric in reversed order
+pipe to head to print top 10
+
+Alternative:
+grep -o '[[:alpha:]]*' shakespeare.txt| sort | uniq -c | sort -n -r | head
+
+
+
+
+Solution task 2:
+comm -23 <(grep -o '[[:alpha:]]*' shakespeare.txt | tr '[:upper:]' '[:lower:]' | sort |uniq) <(sort dict | uniq) | wc -w
+
+Find all alpha numeric words
+convert upper to lower 
+sort it
+find uniques
+
+comm -12 <(sort dict | uniq) <(comm -23 <(grep -o '[[:alpha:]]*' shakespeare.txt | tr '[:upper:]' '[:lower:]' | sort |uniq) <(sort dict | uniq))
+
+
+#SED
+sed -e 's/#.*//' -e '/^\s*$/d' script.py > script_cleaned.py
+cat script_cleaned.py
